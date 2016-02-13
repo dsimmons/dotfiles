@@ -1,9 +1,12 @@
 [submodule "vim"]
 	path = vim
 	url = https://github.com/dsimmons/.vim
+	branch = master
 [submodule "tmux"]
 	path = tmux
 	url = https://github.com/dsimmons/.tmux
+	branch = master
 [submodule "zsh"]
 	path = zsh
 	url = https://github.com/dsimmons/.zsh
+	branch = master
