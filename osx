@@ -1,0 +1,183 @@
+#!/usr/bin/env bash
+
+# Credit where credit is due!
+#
+# Snippets and inspriation gratuitously derived from each/either of following:
+#   - https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+#   - https://gist.github.com/brandonb927/3195465
+#
+# Do note that what's below is highly modified/customized on an opinionated,
+# as-needed basis.
+
+# Ask for the administrator password upfront and keep-alive until finished.
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Set computer name (as done via System Preferences → Sharing)
+# Note: Commented out so that folks don't unintentionally clobber their computer
+# name(s) with my own (similar to .gitconfig).
+# sudo scutil --set ComputerName "simmons-mbp"
+# sudo scutil --set HostName "simmons-mbp"
+# sudo scutil --set LocalHostName "simmons-mbp"
+# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "simmons-mbp"
+
+###############################################################################
+# General                                                                     #
+###############################################################################
+
+# Auto-hide the (top) menu bar.
+defaults write -g "_HIHideMenuBar" -bool true
+
+# Set highlight color to green.
+defaults write -g AppleHighlightColor -string "0.764700 0.976500 0.568600"
+
+# Set sidebar icon size to small.
+defaults write -g NSTableViewDefaultSizeMode -int 1
+
+# Increase window resize speed for Cocoa applications.
+defaults write -g NSWindowResizeTime -float 0.001
+
+# Disable the “Are you sure you want to open this application?” dialog.
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+###############################################################################
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
+###############################################################################
+
+# Disable press-and-hold for keys in favor of key repeat.
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Set a really fast key repeat.
+defaults write -g KeyRepeat -int 0
+
+# Enable tap to click (Trackpad) for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write -g com.apple.mouse.tapBehavior -int 1
+defaults write -g com.apple.mouse.tapBehavior -int 1
+
+# Enable full keyboard access for all controls
+# (e.g. enable Tab in modal dialogs)
+defaults write -g AppleKeyboardUIMode -int 3
+
+# Enable Expose gesture (swipe down with three fingers).
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+
+###############################################################################
+# Screen                                                                      #
+###############################################################################
+
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Turn off automatic brightness.
+# NOTE: `sudo` here is significant/required.
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
+
+###############################################################################
+# Users & Groups                                                              #
+###############################################################################
+
+# Disable (login) guest account.
+defaults write com.apple.loginwindow GuestEnabled -bool NO
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# New Finder windows start in $HOME.
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+
+# Allow text selection in Quick Look.
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Show hidden files.
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Show filename extensions.
+defaults write -g AppleShowAllExtensions -bool true
+
+# Show Finder "status bar" (View -> Show Status Bar).
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Show Finder "path bar" (View -> Show Path Bar).
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Display full POSIX path as Finder window title.
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Disable the warning when changing a file extension.
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Avoid creating .DS_Store files on network volumes.
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Use list view in all Finder windows by default.
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+# Disable the warning before emptying the Trash.
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Show the ~/Library folder.
+chflags nohidden ~/Library
+
+# Show the /Volumes folder.
+sudo chflags nohidden /Volumes
+
+###############################################################################
+# Dock & Dashboard                                                            #
+###############################################################################
+
+# Set the icon size of Dock items to 36px (much smaller).
+# Default (El Capitan, 2016-05-30): 51px
+defaults write com.apple.dock tilesize -int 36
+
+# Change minimize/maximize window effect (much faster).
+# Default (El Capitan, 2016-05-30): "genie"
+defaults write com.apple.dock mineffect -string "scale"
+
+# Minimize windows into their application’s icon.
+defaults write com.apple.dock minimize-to-application -bool true
+
+# Show only open applications in the Dock.
+defaults write com.apple.dock static-only -bool true
+
+# Speed up Mission Control animations.
+defaults write com.apple.dock expose-animation-duration -float 0.1
+
+# 1. Disable Dashboard.
+# 2. Don’t show Dashboard as a Space.
+defaults write com.apple.dashboard mcx-disabled -bool true
+defaults write com.apple.dock dashboard-in-overlay -bool true
+
+# 1. Auto-hide the Dock.
+# 2. Remove the auto-hiding Dock delay.
+# 3. Remove the animation when hiding/showing the Dock.
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Make Dock icons of hidden applications translucent
+defaults write com.apple.dock showhidden -bool true
+
+###############################################################################
+# Terminal & iTerm 2                                                          #
+###############################################################################
+
+# Only use UTF-8 in Terminal.app.
+defaults write com.apple.terminal StringEncodings -array 4
+
+# Don’t display the annoying prompt when quitting iTerm.
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+###############################################################################
+# TextEdit                                                                    #
+###############################################################################
+
+# Use plain text mode for new TextEdit documents.
+defaults write com.apple.TextEdit RichText -int 0
+
+# Open and save files as UTF-8 in TextEdit.
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
