@@ -1,0 +1,43 @@
+# vim: set ft=conf:
+
+.cache
+# Several programs store caches at weird locations (e.g. ~/.config) and it
+# drives me bananas. This is an attempt to catch as many as possible.
+**/cache
+**/Cache
+**/CacheStorage
+
+# Any properly-designed JS project should have reproducible builds, so this is
+# redundant (and humongous).
+**/node_modules
+
+.local/share/TelegramDesktop
+.local/share/Trash
+.local/share/virtualenv*
+
+# These dirs are littered with random ephemeral cache files that are constantly
+# in-flux (can cause issues with an in-progress snapshot), and there's no data
+# worth backing up anyway given that it's persistently synced between
+# devices/servers.
+.config/BraveSoftware
+.config/google-chrome
+
+# Electron apps that derive their state from user authentication or external
+# configuration files. Thus, there's nothing worth backing up.
+.config/discord
+.config/Lens
+
+# Various package managers. Should always be reproducible.
+.cargo
+.lein
+.m2
+.npm
+.pyenv
+.rustup
+
+# Random programs that don't use XDG.
+.moc
+.mozilla
+.nv
+.urxvt
+.zoom
