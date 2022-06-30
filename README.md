@@ -6,7 +6,14 @@ Example:
 
 ```bash
 # ~/dotfiles
+stow alacritty
+stow bash
+stow config
+stow gnupg
+stow i3
 stow nvim
+stow redshift
+stow X
 ```
 
 This automatically creates `$HOME` symlinks which mirror the directory structure. It works especially well for bins that have files and/or configuration located at one or more of `~`, `XDG_CONFIG_HOME`, or `XDG_DATA_HOME`.
