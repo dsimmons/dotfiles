@@ -1,0 +1,8 @@
+# A better place for this stuff might be ~/.xinitrc, but LightDM doesn't use it.
+
+# Increase key repeat rate and decrease delay.
+xset r rate 170 40
+
+# Source my xrandr config for my multi-monitor setup.
+# NOTE: Intended for my desktop setup only. Uncommented there.
+# ./.screenlayout/default.sh
