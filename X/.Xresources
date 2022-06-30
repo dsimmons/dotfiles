@@ -1,4 +1,7 @@
+!! NOTE: Swap with line below for high-DPI displays (laptop).
+!! Still working on my Linux high-DPI setup, but increasing to 120 helps.
 Xft.dpi:       96
+!! Xft.dpi:       120
 Xft.antialias: true
 Xft.hinting:   true
 Xft.rgba:      rgb
