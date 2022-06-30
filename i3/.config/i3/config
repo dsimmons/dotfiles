@@ -1,3 +1,15 @@
+# Decrease keyboard repeat delay, increase rate.
+#
+# Because I move a hardwired mechanical keyboard back and forth between
+# monitors (treadmill desk vs sitting desk), this setting effectively gets reset
+# every time I unplug and replug my keyboard. Reloading i3 (using this line) is
+# a quick and dirty way of setting it again without having to type it out each
+# and every time.
+#
+# TODO: This is technically a hack, but I haven't been able to figure out a more
+# permanent solution for now.
+exec_always --no-startup-id xset r rate 170 40
+
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
