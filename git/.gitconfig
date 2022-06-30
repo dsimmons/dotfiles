@@ -1,0 +1,10 @@
+[user]
+  name = Dan Simmons
+  email = dan@simmons.io
+  signingkey = 05356F1E16D2E132
+[core]
+  editor = nvim
+[commit]
+  gpgsign = true
+[gpg]
+  program = gpg

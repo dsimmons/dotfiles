@@ -9,6 +9,7 @@ Example:
 stow alacritty
 stow bash
 stow config
+stow git
 stow gnupg
 stow i3
 # NOTE: This doesn't work for now -- it needs to be manually copied.
