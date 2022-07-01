@@ -23,6 +23,11 @@ call plug#end()
 " https://github.com/morhetz/gruvbox/wiki/Installation
 autocmd vimenter * ++nested colorscheme gruvbox
 
+" Overwrite default <Space> behavior.
+nnoremap <Space> <Nop>
+" Then, map <Space> to be our leader key.
+let mapleader=" "
+
 " Make moving between split windows easier.
 " eg. <CTRL+W><H> ===> <CTRL+H>
 nnoremap <silent> <C-h> <C-w>h
