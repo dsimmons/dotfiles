@@ -23,3 +23,7 @@ nnoremap <silent> <C-l> <C-w>l
 nnoremap <Leader>ve :e $MYVIMRC<CR>
 " Reload config.
 nnoremap <Leader>vr :source $MYVIMRC<CR>
+
+" Double space to clear hlsearch temporarily.
+" Highlighting is automatically re-enabled after another search.
+nnoremap <Leader><Space> :nohlsearch<CR>
