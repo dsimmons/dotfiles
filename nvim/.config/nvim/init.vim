@@ -10,12 +10,18 @@ call plug#begin(stdpath('data') . '/plugged')
   " Handles automatically launching and initializing language servers.
   Plug 'neovim/nvim-lspconfig'
 
+  Plug 'morhetz/gruvbox'
+  Plug 'tomasr/molokai'
+
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-obsession'
   Plug 'tpope/vim-surround'
 
 call plug#end()
+
+" https://github.com/morhetz/gruvbox/wiki/Installation
+autocmd vimenter * ++nested colorscheme gruvbox
 
 " Make moving between split windows easier.
 " eg. <CTRL+W><H> ===> <CTRL+H>
