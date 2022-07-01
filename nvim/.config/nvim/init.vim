@@ -18,3 +18,8 @@ nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
 nnoremap <silent> <C-l> <C-w>l
+
+" Edit config.
+nnoremap <Leader>ve :e $MYVIMRC<CR>
+" Reload config.
+nnoremap <Leader>vr :source $MYVIMRC<CR>
