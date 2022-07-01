@@ -43,6 +43,12 @@ call plug#begin(stdpath('data') . '/plugged')
 
 call plug#end()
 
+lua << EOF
+  require 'lspconfig'.cssls.setup{}
+  require 'lspconfig'.html.setup{}
+  require 'lspconfig'.jsonls.setup{}
+EOF
+
 " https://github.com/morhetz/gruvbox/wiki/Installation
 autocmd vimenter * ++nested colorscheme gruvbox
 
