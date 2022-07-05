@@ -36,6 +36,10 @@ call plug#begin(stdpath('data') . '/plugged')
   " Handles automatically launching and initializing language servers.
   Plug 'neovim/nvim-lspconfig'
 
+  " A more modern/useful status line without a ton of extra deps.
+  Plug 'nvim-lualine/lualine.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'   " Required for lualine.
+
   " Use a better colorscheme.
   Plug 'morhetz/gruvbox'
 
@@ -47,14 +51,17 @@ call plug#begin(stdpath('data') . '/plugged')
 
 call plug#end()
 
-lua << EOF
-  require 'lspconfig'.cssls.setup{}
-  require 'lspconfig'.html.setup{}
-  require 'lspconfig'.jsonls.setup{}
-EOF
-
 " https://github.com/morhetz/gruvbox/wiki/Installation
 autocmd vimenter * ++nested colorscheme gruvbox
+
+lua << EOF
+  require('lualine').setup{}
+
+  require('nvim-lsp-installer').setup{}
+  require('lspconfig').cssls.setup{}
+  require('lspconfig').html.setup{}
+  require('lspconfig').jsonls.setup{}
+EOF
 
 " Overwrite default <Space> behavior.
 " Then, map <Space> to be our leader key.
