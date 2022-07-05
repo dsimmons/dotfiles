@@ -49,6 +49,10 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-obsession'
   Plug 'tpope/vim-surround'
 
+  " The plugin that I use for my `todo.txt` file for now.
+  " See: http://todotxt.org/
+  Plug 'https://gitlab.com/dbeniamine/todo.txt-vim'
+
 call plug#end()
 
 " https://github.com/morhetz/gruvbox/wiki/Installation
