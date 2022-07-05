@@ -32,22 +32,43 @@ call plug#begin(stdpath('data') . '/plugged')
   " An easier way to manage LSP server installations.
   Plug 'williamboman/nvim-lsp-installer'
 
-  " A collection of common configurations for the built-in LSP.
+  " A collection of common configurations for built-in LSP integrations.
   " Handles automatically launching and initializing language servers.
   Plug 'neovim/nvim-lspconfig'
 
+  " LSP-like functionality for tools/utils that aren't true "LSP".
+  " e.g. ESLint, shellcheck
+  Plug 'jose-elias-alvarez/null-ls.nvim'
+
+  " Modern fuzzy finder.
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-lua/plenary.nvim'          " Required for Telescope & others.
+
+  " More intelligent parsing, syntax highlighting, etc... (versus regex).
+  " Then, based on understanding the underlying syntax better, we can improve
+  " upon recognized textobjects and comments (e.g. nested languages).
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+
+  " Completion
+  Plug 'hrsh7th/nvim-cmp'
+
+  " Snippets
+  Plug 'L3MON4D3/LuaSnip'
+
   " A more modern/useful status line without a ton of extra deps.
   Plug 'nvim-lualine/lualine.nvim'
-  Plug 'kyazdani42/nvim-web-devicons'   " Required for lualine.
-
-  " Use a better colorscheme.
-  Plug 'morhetz/gruvbox'
+  Plug 'kyazdani42/nvim-web-devicons'   " Required for lualine, Telescope.
 
   " Tpope essentials that I don't know how to function without.
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-obsession'
   Plug 'tpope/vim-surround'
+
+  " Use a better colorscheme.
+  Plug 'morhetz/gruvbox'
 
   " The plugin that I use for my `todo.txt` file for now.
   " See: http://todotxt.org/
