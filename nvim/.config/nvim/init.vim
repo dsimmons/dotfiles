@@ -29,13 +29,17 @@ set splitbelow        " When splitting horizontally, focus the bottom.
 " Store plugin data at ~/.local/share/nvim/plugged.
 call plug#begin(stdpath('data') . '/plugged')
 
+  " An easier way to manage LSP server installations.
+  Plug 'williamboman/nvim-lsp-installer'
+
   " A collection of common configurations for the built-in LSP.
   " Handles automatically launching and initializing language servers.
   Plug 'neovim/nvim-lspconfig'
 
+  " Use a better colorscheme.
   Plug 'morhetz/gruvbox'
-  Plug 'tomasr/molokai'
 
+  " Tpope essentials that I don't know how to function without.
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-obsession'
