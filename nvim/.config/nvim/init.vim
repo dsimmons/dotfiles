@@ -80,12 +80,29 @@ call plug#end()
 autocmd vimenter * ++nested colorscheme gruvbox
 
 lua << EOF
+  require('nvim-lsp-installer').setup{}
+
+  require('telescope').setup{}
   require('lualine').setup{}
 
-  require('nvim-lsp-installer').setup{}
+  require('lspconfig').bashls.setup{}
   require('lspconfig').cssls.setup{}
+  require('lspconfig').denols.setup{}
+  require('lspconfig').dockerls.setup{}
+  require('lspconfig').eslint.setup{}
+  require('lspconfig').gopls.setup{}
+  require('lspconfig').graphql.setup{}
   require('lspconfig').html.setup{}
   require('lspconfig').jsonls.setup{}
+  require('lspconfig').marksman.setup{}
+  require('lspconfig').pyright.setup{}
+  require('lspconfig').rust_analyzer.setup{}
+  require('lspconfig').solc.setup{}
+  require('lspconfig').sumneko_lua.setup{}
+  require('lspconfig').tailwindcss.setup{}
+  require('lspconfig').tsserver.setup{}
+  require('lspconfig').vimls.setup{}
+  require('lspconfig').yamlls.setup{}
 EOF
 
 " Overwrite default <Space> behavior.
