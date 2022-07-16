@@ -87,7 +87,6 @@ lua << EOF
 
   require('lspconfig').bashls.setup{}
   require('lspconfig').cssls.setup{}
-  require('lspconfig').denols.setup{}
   require('lspconfig').dockerls.setup{}
   require('lspconfig').eslint.setup{}
   require('lspconfig').gopls.setup{}
