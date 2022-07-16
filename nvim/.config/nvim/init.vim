@@ -124,3 +124,16 @@ nnoremap <Leader>vr :source $MYVIMRC<CR>
 " Double space to clear hlsearch temporarily.
 " Highlighting is automatically re-enabled after another search.
 nnoremap <silent> <Leader><Space> :nohlsearch<CR>
+
+" When a pane loses focus, disable its `cursorline` and enable it in the
+" focused pane instead. Basically, only the focused pane should have
+" `cursorline` enabled. Otherwise, it's very visually distracting, and
+" `cursorline` can even blend in with the statusline depending on how your
+" panes are split.
+augroup CursorLine
+  autocmd!
+  autocmd VimEnter * setlocal cursorline
+  autocmd WinEnter * setlocal cursorline
+  autocmd BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
