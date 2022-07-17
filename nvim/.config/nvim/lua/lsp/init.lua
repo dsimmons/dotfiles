@@ -49,17 +49,48 @@ local enabled_lsps = {
   "pyright",
   "rust_analyzer",
   "solc",
-  "sumneko_lua",
+  -- "sumneko_lua",
   "tailwindcss",
   "tsserver",
   "vimls",
   "yamlls"
 }
 
+local lspconfig = require('lspconfig')
+
 -- Add our callback to each LSP server we care about.
+--
+-- TODO: Decide how to handle per-server configuration that requires more than
+-- the basic `on_attach` callback. See `sumneko_lua` below as an example.
 for _, lsp in ipairs(enabled_lsps) do
-  require('lspconfig')[lsp].setup { on_attach = on_attach }
+  lspconfig[lsp].setup { on_attach = on_attach }
 end
+
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
+lspconfig.sumneko_lua.setup {
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most
+        -- likely LuaJIT in the case of Neovim).
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Allow the `vim` global.
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files.
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data.
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
 local null_ls = require('null-ls')
