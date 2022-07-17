@@ -1,7 +1,7 @@
-require('settings')
-require('keymaps')
-require('commands')
-require('plugins')
+require('user.settings')
+require('user.keymaps')
+require('user.commands')
+require('user.plugins')
 require('lsp')
 
 require('telescope').setup{}
