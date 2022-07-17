@@ -1,0 +1,6 @@
+# Global .gitignore exclusions. Defaults to $XDG_CONFIG_HOME/git/ignore.
+#
+# See git config's `core.excludesfile`.
+
+# The default vim-obsession session name.
+Session.vim
