@@ -34,6 +34,7 @@
 .npm
 .pyenv
 .rustup
+go
 
 # Random programs that don't use XDG.
 .moc
