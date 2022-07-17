@@ -8,3 +8,17 @@
   gpgsign = true
 [gpg]
   program = gpg
+[alias]
+  a = add
+  br = branch
+  ci = commit
+  cl = clone
+  co = checkout
+  cp = cherry-pick
+  d = diff
+  dc = diff --cached
+  l = log
+  r = reset
+  sh = show
+  s = status
+  st = stash
