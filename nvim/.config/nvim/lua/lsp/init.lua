@@ -2,74 +2,67 @@ require('nvim-lsp-installer').setup {
   automatic_installation = true
 }
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
-local null_ls = require('null-ls')
-null_ls.setup {
-  sources = { null_ls.builtins.formatting.prettier }
-}
+local bind = vim.keymap.set
 
-local lspconfig = require('lspconfig')
-lspconfig.bashls.setup{}
-lspconfig.cssls.setup{}
-lspconfig.dockerls.setup{}
-lspconfig.eslint.setup{}
-lspconfig.gopls.setup{}
-lspconfig.graphql.setup{}
-lspconfig.html.setup{}
-lspconfig.jsonls.setup{}
-lspconfig.marksman.setup{}
-lspconfig.pyright.setup{}
-lspconfig.rust_analyzer.setup{}
-lspconfig.solc.setup{}
-lspconfig.sumneko_lua.setup{}
-lspconfig.tailwindcss.setup{}
-lspconfig.tsserver.setup{}
-lspconfig.vimls.setup{}
-lspconfig.yamlls.setup{}
+local diagnostic = vim.diagnostic
+local opts = { silent=true }
+bind('n', '<space>e', diagnostic.open_float, opts)
+bind('n', '[d', diagnostic.goto_prev, opts)
+bind('n', ']d', diagnostic.goto_next, opts)
+bind('n', '<space>q', diagnostic.setloclist, opts)
 
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+-- Set up mappings using a callback when an LSP server attaches to the current
+-- buffer.
+local buf = vim.lsp.buf
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  local bufopts = { silent=true, buffer=bufnr }
+  bind('n', 'gD', buf.declaration, bufopts)
+  bind('n', 'gd', buf.definition, bufopts)
+  bind('n', 'K', buf.hover, bufopts)
+  bind('n', 'gi', buf.implementation, bufopts)
+  bind('n', '<C-k>', buf.signature_help, bufopts)
+  bind('n', '<space>wa', buf.add_workspace_folder, bufopts)
+  bind('n', '<space>wr', buf.remove_workspace_folder, bufopts)
+  bind('n', '<space>wl', function()
+    print(vim.inspect(buf.list_workspace_folders()))
   end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+  bind('n', '<space>D', buf.type_definition, bufopts)
+  bind('n', '<space>rn', buf.rename, bufopts)
+  bind('n', '<space>ca', buf.code_action, bufopts)
+  bind('n', 'gr', buf.references, bufopts)
+  bind('n', '<space>f', buf.formatting, bufopts)
 end
 
-require('lspconfig')['pyright'].setup{
-  on_attach = on_attach,
+local enabled_lsps = {
+  "bashls",
+  "cssls",
+  "dockerls",
+  "eslint",
+  "gopls",
+  "graphql",
+  "html",
+  "jsonls",
+  "marksman",
+  "pyright",
+  "rust_analyzer",
+  "solc",
+  "sumneko_lua",
+  "tailwindcss",
+  "tsserver",
+  "vimls",
+  "yamlls"
 }
-require('lspconfig')['tsserver'].setup{
-  on_attach = on_attach,
-}
-require('lspconfig')['rust_analyzer'].setup{
-  on_attach = on_attach,
-}
-require('lspconfig').sumneko_lua.setup {
-  on_attach = on_attach,
+
+-- Add our callback to each LSP server we care about.
+for _, lsp in ipairs(enabled_lsps) do
+  require('lspconfig')[lsp].setup { on_attach = on_attach }
+end
+
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
+local null_ls = require('null-ls')
+null_ls.setup {
+  sources = { null_ls.builtins.formatting.prettier }
 }
