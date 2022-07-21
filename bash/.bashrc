@@ -136,8 +136,17 @@ ex ()
   fi
 }
 
+###########
 # TODO: My absolute "essentials". Find a better place for this & improve!
+###########
 set -o vi
+
+alias g='git'
+# I used to have a 'gs' alias for `git status`. Turns out, that's an actual
+# binary, and I've accidentally started it about 1000 times. This effectively
+# just prevents me from being able to do that!
+alias gs='echo DERP!'
 alias ll='lsd -la'
-# Starship
+
+# Starship prompt
 eval "$(starship init bash)"
