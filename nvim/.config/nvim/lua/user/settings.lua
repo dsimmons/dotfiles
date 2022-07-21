@@ -6,6 +6,7 @@ vim.g.mapleader = " "
 -- ================ General ==========================
 opt.wrap = false            -- Have long text extend off-screen.
 opt.relativenumber = true   -- Make motion math easier.
+opt.number = true           -- Relative line numbers, except for the current line ("hybrid").
 
 -- ================ Appearance =======================
 opt.list = true             -- Keep files tidy: show tabs, trailing whitespace, and nbsp.
