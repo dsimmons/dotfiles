@@ -1,35 +1,41 @@
-# vim: set ft=sh:
+# vim: set filetype=sh:
 
+###
 # User apps/bins/tools.
+###
 alacritty
 bitwarden
 discord
-docker
 element-desktop
 firefox
-gvim
-helm
-kubectl
 neovim
 redshift
 signal-desktop
 starship
 syncthing
 telegram-desktop
-tmux
 vlc
 
+###
 # Language-specific and devtools I may or may not install/use.
+###
 # clojure
-# docker-compose
+docker
+go
+helm
+kubectl
 # leiningen
 # librdkafka
 # minikube
+nodejs            # Used by many LSP servers.
+npm
+prettier
 # protobuf
 # pyenv
-# pyright
 
+###
 # Linux utils.
+###
 bat
 bind
 coreutils
@@ -55,6 +61,7 @@ rsync
 stow
 tar
 tldr
+tmux
 traceroute
 tree
 unzip
