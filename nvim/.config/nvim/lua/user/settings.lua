@@ -15,6 +15,7 @@ opt.guicursor = ''          -- Disable default cursor styling (skinny cursor in 
 opt.termguicolors = true    -- Assume we're using a modern terminal, full 24-bit RGB color.
 
 -- ================ Indentation ======================
+opt.smartindent = true      -- Increase autoindent sophistication.
 opt.shiftwidth = 2          -- Number of spaces to use for (auto)indentation and >>, <<.
 opt.shiftround = true       -- Round indentation to a multiple of `shiftwidth` for consistency.
 opt.tabstop = 2             -- Number of spaces to use for a tab.
