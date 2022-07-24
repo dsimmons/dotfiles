@@ -148,6 +148,12 @@ alias g='git'
 alias gs='echo DERP!'
 alias ll='lsd -la'
 
+# Open Neovim with PWD set to ~/dotfiles as fuzzy finding root.
+#
+# Technically there's a Unix `dot` bin, but I'm fine clobbering it until there's
+# a reason to need it. `dot` is much easier to type vs something like `dotf`.
+alias dot="nvim '+lcd $HOME/dotfiles'"
+
 NOTES_DIR="$HOME/notes"
 JOURNAL_DIR="$NOTES_DIR/journal"
 
