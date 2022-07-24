@@ -148,5 +148,19 @@ alias g='git'
 alias gs='echo DERP!'
 alias ll='lsd -la'
 
+NOTES="$HOME/notes"
+# Use the directory of the file being opened as `pwd` rather than that of the
+# spawning terminal.
+VIM_CD='"+lcd %:p:h"'
+
+# Open Neovim with PWD set to $NOTES dir as fuzzy finding root.
+alias notes="nvim '+lcd $NOTES'"
+# Open an ephemeral scratchpad for quick thoughts.
+alias qn="nvim $VIM_CD $NOTES/tmp.md" # [q]uick [n]ote
+# Use todo.txt spec to capture todos.
+alias todo="nvim $VIM_CD $NOTES/todo.txt"
+# Open a new journal entry, e.g. journal/2022-07-23.md
+alias jrnl="nvim $VIM_CD $NOTES/journal/$(date --rfc-3339=date).md"
+
 # Starship prompt
 eval "$(starship init bash)"
