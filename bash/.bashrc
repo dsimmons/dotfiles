@@ -148,19 +148,41 @@ alias g='git'
 alias gs='echo DERP!'
 alias ll='lsd -la'
 
-NOTES="$HOME/notes"
+NOTES_DIR="$HOME/notes"
+JOURNAL_DIR="$NOTES_DIR/journal"
+
 # Use the directory of the file being opened as `pwd` rather than that of the
 # spawning terminal.
-VIM_CD='"+lcd %:p:h"'
+VIM_CD='+lcd %:p:h'
 
-# Open Neovim with PWD set to $NOTES dir as fuzzy finding root.
-alias notes="nvim '+lcd $NOTES'"
+# [G]et [T]hings [D]one
+#
+# A little mini-hub of nvim splits that manage my daily life. This function
+# saves me the effort of doing all of this manually, each/every time.
+gtd () {
+  local TODAY="$(date --rfc-3339=date).md"
+  local YESTERDAY="$(date --date='yesterday' --rfc-3339=date).md"
+
+  PARAMS=(
+    "$NOTES_DIR/todo.txt"           # First, open up my todo.txt file.
+    "$VIM_CD"                       # Then, change `pwd` of that buffer to be $NOTES_DIR.
+    "+sp $JOURNAL_DIR/$TODAY"       # Split horizontally and open up a journal entry for today.
+    "$VIM_CD"                       # Set our `pwd` to be $JOURNAL_DIR.
+    "+vsp $JOURNAL_DIR/$YESTERDAY"  # Vertically split the journal entry with yesterday's.
+    "$VIM_CD"                       # Set our `pwd` to be $JOURNAL_DIR.
+  )
+
+  nvim "${PARAMS[@]}"
+}
+
+# Open Neovim with PWD set to $NOTES_DIR as fuzzy finding root.
+alias notes="nvim '+lcd $NOTES_DIR'"
 # Open an ephemeral scratchpad for quick thoughts.
-alias qn="nvim $VIM_CD $NOTES/tmp.md" # [q]uick [n]ote
+alias qn="nvim '$VIM_CD' $NOTES_DIR/tmp.md" # [q]uick [n]ote
 # Use todo.txt spec to capture todos.
-alias todo="nvim $VIM_CD $NOTES/todo.txt"
+alias todo="nvim '$VIM_CD' $NOTES_DIR/todo.txt"
 # Open a new journal entry, e.g. journal/2022-07-23.md
-alias jrnl="nvim $VIM_CD $NOTES/journal/$(date --rfc-3339=date).md"
+alias jrnl="nvim '$VIM_CD' $JOURNAL_DIR/$(date --rfc-3339=date).md"
 
 # Starship prompt
 eval "$(starship init bash)"
