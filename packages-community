@@ -21,9 +21,11 @@ vlc
 ###
 # clojure
 docker
+docker-compose
 go
 helm
 kubectl
+lazygit
 # leiningen
 # librdkafka
 # minikube
