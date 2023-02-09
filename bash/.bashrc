@@ -148,6 +148,11 @@ alias g='git'
 alias gs='echo DERP!'
 alias ll='lsd -la'
 
+alias kc='kubectl'
+alias dc='docker-compose'
+alias lzd='lazydocker'
+alias lzg='lazygit'
+
 # Open Neovim with PWD set to ~/dotfiles as fuzzy finding root.
 #
 # Technically there's a Unix `dot` bin, but I'm fine clobbering it until there's
