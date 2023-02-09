@@ -1,10 +1,13 @@
 # vim: set ft=sh:
+# aws-cli-v2-bin
 brave-bin
 cheat-bin
 czkawka-gui-bin
+fnm-bin
 google-chrome
 kopia-bin
-ledger-live-bin
-nerd-fonts-complete
+lazydocker
+openlens-bin
 paru-bin
 python-pssh
+vscodium-bin-marketplace
