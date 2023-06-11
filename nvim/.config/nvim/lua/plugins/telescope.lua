@@ -1,24 +1,36 @@
-require('telescope').setup{}
-
-local bind = vim.keymap.set
-local silent = { silent = true }
-
--- Modified from: https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory
---
--- If the buffer being editited is part of a git repository, use that as the
--- project root (versus relative to the pwd). Otherwise, fall back to the
--- default `:pwd` behavior.
---
--- Where applicable (Git repo), it makes finding files independent of the
--- spawning terminal's `pwd` and/or allows for using `set autochdir`.
-local function project_files()
-  local ok = pcall(require('telescope.builtin').git_files)
-  if not ok then require('telescope.builtin').find_files() end
-end
-
-bind('n', '<Leader>fb', require('telescope.builtin').buffers, silent)
-bind('n', '<Leader>fd', require('telescope.builtin').diagnostics, silent)
-bind('n', '<Leader>ff', project_files, silent)
-bind('n', '<Leader>fg', require('telescope.builtin').live_grep, silent)
-bind('n', '<Leader>fh', require('telescope.builtin').help_tags, silent)
-bind('n', '<Leader>fw', require('telescope.builtin').grep_string, silent)
+return {
+  "nvim-telescope/telescope.nvim",
+  dependencies = {
+    { "nvim-telescope/telescope-fzf-native.nvim", enabled = vim.fn.executable "make" == 1, build = "make" },
+  },
+  cmd = "Telescope",
+  opts = function()
+    local actions = require "telescope.actions"
+    local get_icon = require("astronvim.utils").get_icon
+    return {
+      defaults = {
+        prompt_prefix = get_icon("Selected", 1),
+        selection_caret = get_icon("Selected", 1),
+        path_display = { "truncate" },
+        sorting_strategy = "ascending",
+        layout_config = {
+          horizontal = { prompt_position = "top", preview_width = 0.55 },
+          vertical = { mirror = false },
+          width = 0.87,
+          height = 0.80,
+          preview_cutoff = 120,
+        },
+        mappings = {
+          i = {
+            ["<C-n>"] = actions.cycle_history_next,
+            ["<C-p>"] = actions.cycle_history_prev,
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+          },
+          n = { q = actions.close },
+        },
+      },
+    }
+  end,
+  config = require "plugins.configs.telescope",
+}
