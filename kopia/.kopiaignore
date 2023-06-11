@@ -5,15 +5,25 @@
 # drives me bananas. This is an attempt to catch as many as possible.
 **/cache
 **/Cache
+**/Cache_Data
 **/CacheStorage
 
-# Any properly-designed JS project should have reproducible builds, so this is
-# redundant (and humongous).
+# Any properly-designed JS project should have reproducible builds, so backing
+# up project dependencies is both unnecessary and wasteful (not to mention high
+# churn).
 **/node_modules
 
+# Next.js uses a `.next` dir for building and caching. This should always be
+# reproducible, and it's highly volatile. Doesn't make sense to back up.
+**/.next
+
+# Random application data that I'm explicitly opting out of backing up.
 .local/share/TelegramDesktop
 .local/share/Trash
 .local/share/virtualenv*
+.local/share/pnpm
+.local/share/fnm
+.local/share/nvim
 
 # These dirs are littered with random ephemeral cache files that are constantly
 # in-flux (can cause issues with an in-progress snapshot), and there's no data
@@ -27,7 +37,7 @@
 .config/discord
 .config/Lens
 
-# Various package managers. Should always be reproducible.
+# Various package/dependency managers. Should always be reproducible.
 .cargo
 .lein
 .m2
@@ -36,9 +46,13 @@
 .rustup
 go
 
-# Random programs that don't use XDG.
+# Random programs that don't use XDG and cause backup headaches.
+.electrum
 .moc
 .mozilla
 .nv
 .urxvt
 .zoom
+
+# Files that are safe to ignore (no persistence value).
+.xsession-errors*
