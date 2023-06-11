@@ -25,15 +25,18 @@ docker-compose
 go
 helm
 kubectl
+lazydocker
 lazygit
 # leiningen
 # librdkafka
 # minikube
-nodejs            # Used by many LSP servers.
+### Used by many LSP servers.
+nodejs
 npm
 prettier
 # protobuf
-# pyenv
+pyenv
+rustup
 
 ###
 # Linux utils.
@@ -42,6 +45,7 @@ bat
 bind
 coreutils
 cryptsetup
+dust
 fd
 findutils
 fzf
