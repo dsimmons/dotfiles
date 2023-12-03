@@ -12,6 +12,16 @@ input type:keyboard {
     xkb_options caps:escape
 }
 
+# Swap Super<-->Alt on laptop keyboard only.
+#
+# NOTE: Sway doesn't inherit the above more general directives, so we've
+# duplicated them here.
+input "1:1:AT_Translated_Set_2_keyboard" {
+    repeat_delay 170
+    repeat_rate 50
+    xkb_options caps:escape,altwin:swap_alt_win
+}
+
 # https://wiki.archlinux.org/title/sway#Input_devices
 input type:touchpad {
     # Enable tap to click.
