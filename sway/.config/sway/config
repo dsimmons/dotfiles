@@ -1,8 +1,21 @@
+# vim: set sw=4 ts=4 expandtab:
+
 # https://wiki.archlinux.org/title/sway#Typematic_delay_and_rate
 input type:keyboard {
-  repeat_delay 170
-  repeat_rate 50
-  xkb_options caps:escape
+    # Dramatically shorten delay when e.g. holding backspace.
+    repeat_delay 170
+
+    # When holding a key, increase input speed.
+    repeat_rate 50
+
+    # Remap Caps Lock -> Escape.
+    xkb_options caps:escape
+}
+
+# https://wiki.archlinux.org/title/sway#Input_devices
+input type:touchpad {
+    # Enable tap to click.
+    tap enabled
 }
 
 # Default config for sway
