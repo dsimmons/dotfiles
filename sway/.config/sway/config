@@ -1,5 +1,7 @@
 # vim: set sw=4 ts=4 expandtab:
 
+set $mod Mod4
+
 # https://wiki.archlinux.org/title/sway#Typematic_delay_and_rate
 input type:keyboard {
     # Dramatically shorten delay when e.g. holding backspace.
@@ -27,6 +29,17 @@ input type:touchpad {
     # Enable tap to click.
     tap enabled
 }
+
+# Use the built-in `grimshot` script to take screenshots.
+#
+# https://github.com/OctopusET/sway-contrib/blob/master/grimshot.1.scd#examples
+bindsym $mod+p       exec grimshot save active
+bindsym $mod+Shift+p exec grimshot save area
+bindsym $mod+Mod1+p  exec grimshot save output
+bindsym $mod+Ctrl+p  exec grimshot save window
+
+# Open file browser.
+bindsym $mod+o exec thunar
 
 # Default config for sway
 #
