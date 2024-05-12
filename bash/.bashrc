@@ -142,6 +142,3 @@ ex ()
 # TODO: My absolute "essentials". Find a better place for this & improve!
 ###########
 set -o vi
-
-# Starship prompt
-eval "$(starship init bash)"
