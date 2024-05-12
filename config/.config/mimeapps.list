@@ -1,6 +1,7 @@
 [Added Associations]
 image/jpeg=org.gnome.Loupe.desktop;
 image/png=org.gnome.Loupe.desktop;
+video/mp4=org.videolan.VLC.desktop;
 
 [Default Applications]
 text/html=brave-browser.desktop
@@ -9,3 +10,4 @@ x-scheme-handler/https=brave-browser.desktop
 x-scheme-handler/about=brave-browser.desktop
 x-scheme-handler/unknown=brave-browser.desktop
 x-scheme-handler/mailto=brave-browser.desktop
+video/mp4=org.videolan.VLC.desktop
