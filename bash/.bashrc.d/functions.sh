@@ -1,4 +1,24 @@
 #!/usr/bin/env bash
+# vim: shiftwidth=2 tabstop=2 expandtab:
+
+VIM_CD='+lcd %:p:h'
+
+# [q]uick [n]ote
+#
+# Open an ephemeral scratchpad for quick thoughts.
+qn() {
+  nvim "$VIM_CD" "$NOTES_DIR/tmp.md"
+}
+
+# Use todo.txt spec to capture todos.
+todo() {
+  nvim "$VIM_CD" "$NOTES_DIR/todo.txt"
+}
+
+# Open a new journal entry, e.g. journal/2022-07-23.md
+jrnl() {
+  nvim "$VIM_CD" "$JOURNAL_DIR/$(date --rfc-3339=date).md"
+}
 
 # [G]et [T]hings [D]one
 #
