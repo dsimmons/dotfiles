@@ -137,8 +137,3 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
-
-###########
-# TODO: My absolute "essentials". Find a better place for this & improve!
-###########
-set -o vi
