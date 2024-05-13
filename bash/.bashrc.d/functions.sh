@@ -81,6 +81,17 @@ snapshot_homedir() {
   BACKUP_PATH="${BACKUP_DIR}/${BACKUP_FILE}"
   ENCRYPTED_PATH="${BACKUP_DIR}/${ENCRYPTED_FILE}"
 
+  # List of directories to exclude from the backup, worthless/problematic.
+  EXCLUDE_DIRS=(
+    "${HOME}/.cache"
+    "${HOME}/.config/BraveSoftware"
+    "${HOME}/.config/google-chrome-unstable"
+    "${HOME}/.local/share"
+    "${HOME}/.mozilla"
+    "${HOME}/.npm"
+    "${HOME}/.var"
+  )
+
   # Ensure the necessary dependencies exist.
   for cmd in tar zstd gpg; do
     if ! command -v "$cmd" &>/dev/null; then
@@ -90,7 +101,20 @@ snapshot_homedir() {
   done
 
   echo "Creating archive at ${BACKUP_PATH}..."
-  if ! tar --zstd -cpf "${BACKUP_PATH}" "${HOME}"; then
+
+    # Construct the tar command with exclusions
+  TAR_CMD=(tar --zstd -cpf "${BACKUP_PATH}")
+
+  for EXCLUDE_DIR in "${EXCLUDE_DIRS[@]}"; do
+    TAR_CMD+=(--exclude="$EXCLUDE_DIR")
+  done
+
+  # Last: the actual dir (homedir) to back up.
+  TAR_CMD+=("${HOME}")
+
+  echo "${TAR_CMD[@]}"
+
+  if ! "${TAR_CMD[@]}"; then
     echo "Error: failed to create archive at ${BACKUP_PATH}."
     return 1
   fi
