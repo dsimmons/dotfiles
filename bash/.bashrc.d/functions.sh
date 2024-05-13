@@ -60,7 +60,20 @@ gtd() {
 # Currently assumes it's being run interactively, while the invoker is present
 # (symmetric encryption key).
 snapshot_homedir() {
-  BACKUP_DIR="/tmp/manual-snapshots"
+  # Assumes there's a backup staging dir at `/manual-backups`.
+  #
+  # NOTE: Originally used tmpfs, but not enough space.
+  BACKUP_DIR="/manual-backups"
+
+  # Ensure the above directory exists and is writable.
+  #
+  # Would rather fail then ask for superuser privileges.
+  if [ ! -d "$BACKUP_DIR" ]; then
+    echo "Error: backup directory $BACKUP_DIR does not exist."
+  elif [ ! -w "$BACKUP_DIR" ]; then
+    echo "Error: backup directory $BACKUP_DIR is not writable. Check your permissions."
+    return 1
+  fi
 
   BACKUP_FILE="$(date --rfc-3339=date)_${USER}@${HOSTNAME}.tar.zst"
   ENCRYPTED_FILE="${BACKUP_FILE}.gpg"
@@ -71,12 +84,10 @@ snapshot_homedir() {
   # Ensure the necessary dependencies exist.
   for cmd in tar zstd gpg; do
     if ! command -v "$cmd" &>/dev/null; then
-      echo "$cmd could not be found. Please install it and try again."
+      echo "Error: $cmd could not be found."
       return 1
     fi
   done
-
-  mkdir -p "${BACKUP_DIR}"
 
   echo "Creating archive at ${BACKUP_PATH}..."
   if ! tar --zstd -cpf "${BACKUP_PATH}" "${HOME}"; then
