@@ -8,22 +8,18 @@
 **/Cache_Data
 **/CacheStorage
 
-# Any properly-designed JS project should have reproducible builds, so backing
-# up project dependencies is both unnecessary and wasteful (not to mention high
-# churn).
-**/node_modules
-
-# Next.js uses a `.next` dir for building and caching. This should always be
-# reproducible, and it's highly volatile. Doesn't make sense to back up.
-**/.next
+# Flatpak
+.var
 
 # Random application data that I'm explicitly opting out of backing up.
+.local/bin/*.AppImage
 .local/share/TelegramDesktop
 .local/share/Trash
-.local/share/virtualenv*
-.local/share/pnpm
+.local/share/bun
 .local/share/fnm
 .local/share/nvim
+.local/share/pnpm
+.local/share/virtualenv*
 
 # These dirs are littered with random ephemeral cache files that are constantly
 # in-flux (can cause issues with an in-progress snapshot), and there's no data
@@ -31,6 +27,7 @@
 # devices/servers.
 .config/BraveSoftware
 .config/google-chrome
+.config/google-chrome-unstable
 
 # Electron apps that derive their state from user authentication or external
 # configuration files. Thus, there's nothing worth backing up.
@@ -38,6 +35,7 @@
 .config/Lens
 
 # Various package/dependency managers. Should always be reproducible.
+.bun
 .cargo
 .lein
 .m2
@@ -45,6 +43,7 @@
 .pyenv
 .rustup
 go
+venv
 
 # Random programs that don't use XDG and cause backup headaches.
 .electrum
@@ -56,3 +55,21 @@ go
 
 # Files that are safe to ignore (no persistence value).
 .xsession-errors*
+
+# Ephemeral $HOME dirs I sometimes use that don't need to be backed up.
+tmp
+logs
+
+# I generally like backing up my ~/Download dir, but let's skip the ISOs that I
+# frequently download for setting up new hosts.
+Downloads/*.img
+Downloads/*.iso
+
+# Any properly-designed JS project should have reproducible builds, so backing
+# up project dependencies is both unnecessary and wasteful (not to mention high
+# churn).
+**/node_modules
+
+# Next.js uses a `.next` dir for building and caching. This should always be
+# reproducible, and it's highly volatile. Doesn't make sense to back up.
+**/.next
