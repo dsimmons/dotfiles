@@ -1,11 +1,3 @@
-## Clone
-
-This repository makes use of one or more Git submodules, so adding the `--recursive` flag when cloning is important.
-
-```bash
-git clone --recursive git@github.com:dsimmons/dotfiles.git
-```
-
 ## Symlink Dotfiles
 
 This repository is organized for use with [GNU Stow](https://www.gnu.org/software/stow/).
