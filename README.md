@@ -12,9 +12,7 @@ stow config
 stow git
 stow gnupg
 stow i3
-# NOTE: This doesn't work for now -- it needs to be manually copied.
-# See: https://github.com/kopia/kopia/issues/2037
-# stow kopia
+stow kopia
 stow nvim
 stow redshift
 stow X
