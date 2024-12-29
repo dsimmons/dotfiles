@@ -1,0 +1,8 @@
+### Theme/Appearance
+font-size = 14
+font-family = JetBrains Mono
+theme = tokyonight
+
+### Customization
+shell-integration-features = no-cursor
+window-decoration = false
