@@ -2,5 +2,5 @@
 #
 # See git config's `core.excludesfile`.
 
-# The default vim-obsession session name.
-Session.vim
+# Claude Code
+**/.claude/settings.local.json
