@@ -23,7 +23,10 @@
   s = status
   st = stash
 [merge]
-  tool = nvimdiff
-[mergetool "nvimdiff"]
+  tool = nvim
+[mergetool]
+  keepBackup = false
+  prompt = false
+[mergetool "nvim"]
   ; Taken from: https://smittie.de/posts/git-mergetool/
   cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
